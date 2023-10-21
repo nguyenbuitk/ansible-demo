@@ -1,0 +1,43 @@
+# Dictionary/Map: một tập hợp các cặp khóa-giá trị
+# Dưới đây là 1 dict named fruits
+# 
+Fuirts:
+  Orange: orange
+  Apple: red
+  Banana: yellow
+
+# Dictionary in python
+fruit_colors = {'apple': 'red','banana': 'yellow','orange': 'orange' }
+
+# Array/list
+# List trong YAML tương đương với một mảng các phần tử, mỗi phần tử được đánh số và có thể chứa một giá trị hoặc một dictionary hoặc một list khác.
+Fruits:
+  - Orange: orange
+    season: autumn
+  - Apple: red
+    season: summer
+  - Banana: yellow
+
+# list in python
+Fruits = [{'Orange': 'orange', 'season': 'autumn'}, {'Apple': 'red', 'season': 'summer'}, {'Banana': 'yellow'}]
+
+# dict named employee
+employee:
+  name: john
+  gender: male
+  age: 24
+  address:
+    city: 'edison'
+    state: 'new jersey'
+    country: 'united states'
+
+# how to show list of employee?
+# --> using arrays named employees
+employees:
+   - name: john
+     gender: male
+     age: 24
+   - name: sarah
+     gender: female
+     age: 24
+     

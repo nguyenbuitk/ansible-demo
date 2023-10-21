@@ -1,0 +1,12 @@
+- name: copy file playbook
+  hosts: worker
+  become: yes
+  tasks:
+    - name: Create a directory
+      file:
+        path: /tmp/ansible
+        state: directory
+    - name: Copy a file
+      copy:
+        src: /home/ubuntu/get-pip.py
+        dest: /tmp/ansible/get-pip.py

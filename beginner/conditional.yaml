@@ -1,0 +1,8 @@
+- name: Install NGINX
+  hosts: worker
+  tasks:
+    - name: Install NGINX on debian
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"

@@ -1,0 +1,21 @@
+-
+  name: Deploy a web application
+  hosts: poc-m2
+  become: true
+  tasks:
+    - name: Install dependencies
+      apt: name={{ item }} state=present
+      loop:
+       - python3
+       - python3-setuptools
+       - python3-dev
+       - build-essential
+       - python3-pip
+       - python3-mysqldb
+
+    - include: tasks/deploy_db.yml
+    - include: tasks/deploy_web.yml
+
+
+
+

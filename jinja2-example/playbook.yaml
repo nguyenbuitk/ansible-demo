@@ -1,0 +1,9 @@
+- name: Generate Welcome Message
+  hosts: localhost
+  tasks:
+    - name: Create Welcome Message
+      template:
+        src: welcome.j2
+        dest: welcome.txt
+      vars:
+        username: "John"

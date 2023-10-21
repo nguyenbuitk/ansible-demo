@@ -1,0 +1,93 @@
+-
+  name: Deploy a web application
+  hosts: all
+  become: true
+  vars:
+    db_name: employee_db
+    db_user: db_user
+    db_password: Passw0rd
+    mysql_pass: verysecret
+  tasks:
+    - name: Install dependencies
+      apt: name={{ item }} state=present
+      loop:
+       - python3
+       - python3-setuptools
+       - python3-dev
+       - build-essential
+       - python3-pip
+       - python3-mysqldb
+    - name: Install pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install PyMySQL
+      pip:
+        name: pymysql
+        state: present
+    - name: Install MySQL database
+      apt:
+        name: "{{ item }}"
+        state:  present
+      loop:
+       - mysql-server
+       - mysql-client
+
+    - name: Start Mysql Service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+
+    # - name: Change the authentication plugin of MySQL root user to mysql_native_password
+    #   shell: mysql -u root -e 'UPDATE mysql.user SET plugin="mysql_native_password" WHERE user="root" AND host="localhost"'
+
+    # - name: Flush Privileges
+    #   shell: mysql -u root -e 'FLUSH PRIVILEGES'
+
+    # - name: Set MySQL root password
+    #   mysql_user:
+    #     login_host: 'localhost'
+    #     login_user: 'root'
+    #     login_password: ''
+    #     name: 'root'
+    #     password: '{{ mysql_pass }}'
+    #     state: present
+
+    - name: Create Application Database
+      mysql_db: 
+        name: '{{ db_name }}'
+        state: present
+        login_password: '{{ mysql_pass }}'
+        login_user: root
+
+    - name: Create Application DB User
+      mysql_user: 
+        name: '{{ db_user }}'
+        password: '{{ db_password }}'
+        priv: '*.*:ALL'
+        host: '%'
+        state: 'present'
+        login_password: '{{ mysql_pass }}'
+        login_user: root
+
+    - name: Install Python Flask dependencies
+      pip:
+        name: '{{ item }}'
+        state: present
+      loop:
+       - flask
+       - flask-mysql
+
+    - name: Copy web-server code
+      copy: src=app.py dest=/opt/app.py
+
+    - name: Start web-application
+      shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &
+
+  handlers:
+      - name: Restart MySQL
+        service:
+          name: mysql
+          state: restarted

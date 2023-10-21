@@ -1,0 +1,12 @@
+- name: Install a Package Using a Variable
+  hosts: worker
+  become: yes
+
+  vars:
+    package_name: "nginx"
+
+  tasks:
+    - name: Ensure the package is installed
+      package:
+        name: "{{ package_name }}"
+        state: present

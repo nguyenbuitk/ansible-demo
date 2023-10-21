@@ -1,0 +1,1 @@
+poc-m3 ansible_connection=ssh ansible_host=poc-m3.ovng.dev.myovcloud.com ansible_port=1982 ansible_ssh_private_key_file=/home/ubuntu/.ssh/ovng_poc
