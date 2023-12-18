@@ -1,0 +1,7 @@
+---
+- name: Deploy My Web App
+  hosts: web_servers
+  become: true
+  roles:
+    - frontend
+    - backend

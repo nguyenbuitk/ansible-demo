@@ -1,0 +1,9 @@
+---
+- name: 'Add nameserver in resolve.conf file in localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Add nameserver in resolv.conf file'
+      lineinfile:
+        path: /etc/resolv.conf
+        line: 'nameserver {{nameserver_ip}}'

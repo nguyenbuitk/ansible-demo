@@ -1,0 +1,5 @@
+backend_dependencies:
+  - nodejs
+  - npm
+
+backend_port: 3000
