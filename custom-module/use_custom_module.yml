@@ -1,0 +1,12 @@
+---
+- name: Use Custom Module Example
+  hosts: localhost
+  tasks:
+    - name: Perform Addition
+      addition:
+        num1: 5
+        num2: 7
+      register: result
+    - name: Display Result
+      debug:
+        var: result.result
