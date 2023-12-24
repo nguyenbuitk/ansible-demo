@@ -1,8 +1,13 @@
 ---
 - name: Install backend dependencies
   apt:
-    name: "{{ backedn_dependenceis }}"
+    name: "{{ backend_dependencies }}"
     state: present
+
+- name: Create /etc/backend directory
+  ansible.builtin.file:
+    path: /etc/backend
+    state: directory
 
 - name: Copy backend configuration file
   template:

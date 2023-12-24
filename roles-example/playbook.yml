@@ -1,6 +1,6 @@
 ---
 - name: Deploy My Web App
-  hosts: web_servers
+  hosts: poc-m1
   become: true
   roles:
     - frontend

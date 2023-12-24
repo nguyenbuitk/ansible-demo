@@ -1,0 +1,18 @@
+---
+- name: Run a simple command using the command module
+  hosts: localhost
+  become: yes  # Run tasks with sudo
+
+  tasks:
+    - name: Check disk space
+      command: df -h
+      register: disk_space_output
+      become: yes
+
+    - name: Display disk space information
+      append_message:
+      when: disk_space_output.rc == 0  # Run only if the command is successful
+
+    - name: Display modified output
+      debug:
+        var: disk_space_output.stdout_lines

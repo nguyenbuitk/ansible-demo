@@ -1,0 +1,5 @@
+frontend_dependencies:
+  - apache2
+  - php
+  - libapache2-mod-php
+frontend_port: 80

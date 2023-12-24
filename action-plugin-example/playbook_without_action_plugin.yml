@@ -1,0 +1,11 @@
+---
+- name: Run a simple command using the command module
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Check disk space
+      command: df -h
+      register: disk_space_output
+    - name: display disk space information
+      debug:
+        var: disk_space_output.stdout_lines
